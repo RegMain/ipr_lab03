@@ -1,0 +1,17 @@
+services:
+  frontend:
+    image: regmain/lab-frontend
+    ports:
+      - "8080:80"
+      
+  api:
+    image: containous/whoami
+    
+  logger:
+    image: busybox
+    command: sh -c 'while :; do echo "LOG $$(date)" >> /var/log/test.log; sleep 1; done'
+    volumes:
+      - logs:/var/log
+
+volumes:
+  logs:
