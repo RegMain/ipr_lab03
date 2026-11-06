@@ -19,13 +19,13 @@ jobs:
           htmlhint index.html
 
       - name: Build Docker image
-        run: docker build -t my-site:ci
+        run: docker build -t lab3:ci .
 
       - name: Smoke test container
         run: |
-          docker run -d --name test-site -p 8080:80 my-site:ci
-          for 1 in $(seq 1 10); do
-            if curl -sf https://localhost:8080 > /tmp/page.html; then; break; fi
+          docker run -d --name l3test -p 8080:80 lab3:ci
+          for i in $(seq 1 7); do
+            if curl -sf http://localhost:8080 > /tmp/page.html; then; break; fi
             sleep 1
           done
           grep -q "Харьков Иван" /tmp/page.html
@@ -33,4 +33,4 @@ jobs:
 
       - name: Cleanup
         if: always()
-        run: docker rm -f test-site || true
+        run: docker rm -f l3test || true
