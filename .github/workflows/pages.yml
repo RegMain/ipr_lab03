@@ -1,8 +1,12 @@
 name: Pages
 
 on:
-  push:
-    branches: [ master ]
+  worklow_run:
+    workflows: ["Pipeline"]
+    types:
+      - completed
+    branches:
+      - master
 
 permissions:
   contents: read
