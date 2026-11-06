@@ -2,9 +2,9 @@ name: Pipeline
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   ci:
@@ -25,7 +25,7 @@ jobs:
         run: |
           docker run -d --name l3test -p 8080:80 lab3:ci
           for i in $(seq 1 7); do
-            if curl -sf http://localhost:8080 > /tmp/page.html; then; break; fi
+            if curl -sf http://localhost:8080 > /tmp/page.html; then break; fi
             sleep 1
           done
           grep -q "Харьков Иван" /tmp/page.html
