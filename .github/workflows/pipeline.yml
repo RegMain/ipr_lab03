@@ -30,6 +30,10 @@ jobs:
           done
           grep -q "Харьков Иван" /tmp/page.html
           echo "OK"
+
+      - name: Hello World
+        if: always()
+        run: echo "Hello, World!"
       
       - name: Cleanup
         if: always()
